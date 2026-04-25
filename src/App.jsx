@@ -1,10 +1,12 @@
-import { useState } from "react"
+import { useRef, useState } from "react"
 
 const letters = "abcdefghijklmnopqrstuvwxyz";
 const numbers = "0123456789";
 const symbols = `!@#$%^&*()-_=+[]{}|;:'\\",.<>?/~`;
 
 function App() {
+
+  let descRef = useRef(null);
 
   const [name, setName] = useState("");
   const [username, setUsername] = useState("");
@@ -54,8 +56,9 @@ function App() {
     return true
   }
 
-  const isDescriptionValid = (description) => {
+  const isDescriptionValid = () => {
 
+    const description = descRef.current.value;
     const noSpaceDesc = description.trim();
 
     if (noSpaceDesc.length < 100) {
@@ -77,6 +80,7 @@ function App() {
     /*     if (!isUsernameValid(username) || !isPasswordValid(password) || !isDescriptionValid(desc)) {
           return
         } */
+    if (!isDescriptionValid()) return;
 
     if (!name || !username || !password || !spec || !exp) {
       alert("Compila tutti i campi!")
@@ -117,10 +121,10 @@ function App() {
 
           <input className="field" type="number" min={1} placeholder="Anni di Esperienza" required value={exp} onChange={(e) => { setExp(e.target.value) }} />
 
-          {desc ? <label style={{ color: descError.valid ? "green" : "red" }}>
+          {descError.text ? <label style={{ color: descError.valid ? "green" : "red" }}>
             {descError.text}
           </label> : null}
-          <textarea className="field" name="feedback" rows="5" cols="40" placeholder="Descrizione" required value={desc} onChange={(e) => { setDesc(e.target.value); isDescriptionValid(e.target.value) }} />
+          <textarea className="field" name="feedback" rows="5" cols="40" placeholder="Descrizione" required ref={descRef} />
 
           <button type="submit">Invia</button>
 
