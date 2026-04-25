@@ -83,6 +83,10 @@ select.field option {
     background-color: #141414;
 }
 
+select.field:has(option[value=""]:checked) {
+    color: #4a4a4a;
+}
+
 /* ── Textarea ─────────────────────────────────────── */
 textarea.field {
     resize: vertical;
