@@ -102,21 +102,29 @@ label {
     margin-bottom: -0.15rem;
 }
 
-/* ── Submit button ────────────────────────────────── */
-button[type="submit"] {
-    margin-top: 0.75rem;
-    background-color: transparent;
-    color: #00e5ff;
+/* ── Buttons (base condivisa) ─────────────────────── */
+button {
     font-family: inherit;
     font-size: 0.875rem;
     font-weight: 700;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    border: 1px solid #00e5ff;
     border-radius: 3px;
     padding: 0.75rem;
     cursor: pointer;
-    transition: background-color 0.2s, color 0.2s;
+    transition: background-color 0.2s, color 0.2s, opacity 0.2s;
+}
+
+button:active {
+    opacity: 0.85;
+}
+
+/* ── Submit button ────────────────────────────────── */
+button[type="submit"] {
+    margin-top: 0.75rem;
+    background-color: transparent;
+    color: #00e5ff;
+    border: 1px solid #00e5ff;
 }
 
 button[type="submit"]:hover {
@@ -124,6 +132,36 @@ button[type="submit"]:hover {
     color: #0e0e0e;
 }
 
-button[type="submit"]:active {
-    opacity: 0.85;
+/* ── Reset button ─────────────────────────────────── */
+button[type="button"]:not(.scroll-btn) {
+    background-color: transparent;
+    color: #888;
+    border: 1px solid #2e2e2e;
+}
+
+button[type="button"]:not(.scroll-btn):hover {
+    border-color: #888;
+    color: #d4d4d4;
+}
+
+/* ── Scroll-to-top button ─────────────────────────── */
+.scroll-btn {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    padding: 0.65rem 0.85rem;
+    background-color: #141414;
+    color: #00e5ff;
+    border: 1px solid #00e5ff33;
+    letter-spacing: 0;
+    text-transform: none;
+    font-size: 1.2rem;
+    line-height: 1;
+    border-radius: 3px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.scroll-btn:hover {
+    border-color: #00e5ff;
+    box-shadow: 0 0 0 2px #00e5ff1a;
 }

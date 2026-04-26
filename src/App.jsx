@@ -95,23 +95,44 @@ function App() {
     console.log({ name, username, password, spec, experienceYears: Number(exp), desc })
   }
 
+  function handleReset() {
+    setName("");
+    setUsername("");
+    setPassword("");
+    setSpec("");
+    setExp("");
+    setDesc("");
+    setUsernameError({ text: "", valid: null });
+    setPasswordError({ text: "", valid: null });
+    setDescError({ text: "", valid: null });
+
+    descRef.current.value = "";
+  }
+
   return (
     <>
       <h1 className="title">WEB DEVELOPER SIGN UP</h1>
       <div className="container">
         <form onSubmit={handleSubmit}>
-          <input className="field" type="text" placeholder="Nome" required value={name} onChange={(e) => { setName(e.target.value) }} />
 
-          {username ? <label style={{ color: usernameError.valid ? "green" : "red" }}>
-            {usernameError.text}
-          </label> : null}
+          {/* Name */}
+          <input autoFocus className="field" type="text" placeholder="Nome" required value={name} onChange={(e) => { setName(e.target.value) }} />
+
+          {/* Username */}
+          {username ?
+            <label style={{ color: usernameError.valid ? "green" : "red" }}>
+              {usernameError.text}
+            </label> : null}
           <input className="field" type="text" placeholder="Username" required value={username} onChange={(e) => { setUsername(e.target.value); isUsernameValid(e.target.value) }} />
 
-          {password ? <label style={{ color: passwordError.valid ? "green" : "red" }}>
-            {passwordError.text}
-          </label> : null}
+          {/* Password */}
+          {password ?
+            <label style={{ color: passwordError.valid ? "green" : "red" }}>
+              {passwordError.text}
+            </label> : null}
           <input className="field" type="password" placeholder="Password" required value={password} onChange={(e) => { setPassword(e.target.value); isPasswordValid(e.target.value) }} />
 
+          {/* Select Specialization */}
           <select name="spec" id="spec" className="field" required value={spec} onChange={(e) => { setSpec(e.target.value) }}>
             <option value="" disabled>- Seleziona Specializzazione -</option>
             <option value="full-stack">Full Stack</option>
@@ -119,14 +140,24 @@ function App() {
             <option value="backend">Backend</option>
           </select>
 
+          {/* Years */}
           <input className="field" type="number" min={1} placeholder="Anni di Esperienza" required value={exp} onChange={(e) => { setExp(e.target.value) }} />
 
-          {descError.text ? <label style={{ color: descError.valid ? "green" : "red" }}>
-            {descError.text}
-          </label> : null}
+          {/* Description */}
+          {descError.text ?
+            <label style={{ color: descError.valid ? "green" : "red" }}>
+              {descError.text}
+            </label> : null}
           <textarea className="field" name="feedback" rows="5" cols="40" placeholder="Descrizione" required ref={descRef} />
 
           <button type="submit">Invia</button>
+          <button type="button" onClick={handleReset}>Reset</button>
+
+          <button
+            type="button"
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+            className="scroll-btn"
+          >Torna su</button>
 
 
         </form>
